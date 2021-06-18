@@ -8,3 +8,6 @@ INSERT INTO categoria (nome) value('Alimentação');
 INSERT INTO categoria (nome) value('Supermercado');
 INSERT INTO categoria (nome) value('Farmacia');
 INSERT INTO categoria (nome) value('outros');
+
+
+
