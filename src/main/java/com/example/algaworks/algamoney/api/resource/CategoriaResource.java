@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
     @RequestMapping("/categorias")
@@ -29,23 +30,37 @@ import java.util.List;
         }
 
         @PostMapping
-        //@ResponseStatus(HttpStatus.CREATED) // vai me reronar um 201 created
         public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria, HttpServletResponse response) {
-        // @@RequestBody pode ser colocada em um metodo no nosso caso é o "crar"
-        // @@RequestBody --> se corpo da requisição que enviamos dados para serem gravados no servido
            Categoria categoriaSalva = categoriaRepository.save(categoria);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
                     .buildAndExpand(categoriaSalva.getCodigo()).toUri();
             response.setHeader("Location", uri.toASCIIString());
-           //no REST Devemos informar como  recuperar o recurso que foi criado
+
 
             return ResponseEntity.created(uri).body(categoriaSalva);
         }
 
-    @GetMapping("/{codigo}")
-    public Categoria buscarPeloCodigo(@PathVariable long codigo){
+         /*@GetMapping("/{codigo}")
+        public Categoria buscarPeloCodigo(@PathVariable Long codigo){
            return this.categoriaRepository.findById(codigo).orElse(null);
-        }
+        }*/
+
+
+        //Desafio : Retornar 404 caso não exista a categoria utilizando Map//
+        /*@GetMapping("/{codigo}")
+        public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
+            return this.categoriaRepository.findById(codigo)
+                    .map(categoria -> ResponseEntity.ok(categoria))
+                    .orElse(ResponseEntity.notFound().build());        }*/
+
+    //Desafio : Retornar 404 caso não exista a categoria utilizando isPresente//
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
+        Optional<Categoria> categoria = this.categoriaRepository.findById(codigo);
+        return categoria.isPresent()?
+                ResponseEntity.ok(categoria.get()) : ResponseEntity.notFound().build();
+
+    }
 
     }
 
