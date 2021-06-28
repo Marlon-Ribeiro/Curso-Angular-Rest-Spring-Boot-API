@@ -54,13 +54,13 @@ private  Boolean ativo;
  @Override
  public boolean equals(Object o) {
   if (this == o) return true;
-  if (o == null || getClass() != o.getClass()) return false;
+  if (!(o instanceof Pessoa)) return false;
   Pessoa pessoa = (Pessoa) o;
-  return codigo.equals(pessoa.codigo) && nome.equals(pessoa.nome) && endereco.equals(pessoa.endereco) && ativo.equals(pessoa.ativo);
+  return getCodigo().equals(pessoa.getCodigo()) && getNome().equals(pessoa.getNome()) && getEndereco().equals(pessoa.getEndereco()) && getAtivo().equals(pessoa.getAtivo());
  }
 
  @Override
  public int hashCode() {
-  return Objects.hash(codigo, nome, endereco, ativo);
+  return Objects.hash(getCodigo(), getNome(), getEndereco(), getAtivo());
  }
 }

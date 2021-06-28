@@ -36,20 +36,9 @@ public class PessoaResource {
             return ResponseEntity.created(uri).body(pessoaSalva);
         }
 
-         /*@GetMapping("/{codigo}")
-        public Categoria buscarPeloCodigo(@PathVariable Long codigo){
-           return this.categoriaRepository.findById(codigo).orElse(null);
-        }*/
 
 
-        //Desafio : Retornar 404 caso não exista a categoria utilizando Map//
-        /*@GetMapping("/{codigo}")
-        public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
-            return this.categoriaRepository.findById(codigo)
-                    .map(categoria -> ResponseEntity.ok(categoria))
-                    .orElse(ResponseEntity.notFound().build());        }*/
 
-        //Desafio : Retornar 404 caso não exista a categoria utilizando isPresente//
         @GetMapping("/{codigo}")
         public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo){
             Optional<Pessoa> pessoa = this.pessoaRepository.findById(codigo);
