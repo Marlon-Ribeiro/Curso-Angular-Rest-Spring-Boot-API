@@ -1,8 +1,8 @@
 package com.example.algaworks.algamoney.api.resource;
 
-import com.example.algaworks.algamoney.api.model.Categoria;
+
 import com.example.algaworks.algamoney.api.model.Pessoa;
-import com.example.algaworks.algamoney.api.repository.CategoriaRepository;
+
 import com.example.algaworks.algamoney.api.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 @RestController
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PessoaResource {
         @Autowired
         private PessoaRepository pessoaRepository;

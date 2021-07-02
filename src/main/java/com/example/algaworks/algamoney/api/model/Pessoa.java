@@ -2,16 +2,18 @@ package com.example.algaworks.algamoney.api.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
 @Table(name="pessoa")
 public class Pessoa {
  @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long codigo;
 
-@NotNull
+ @NotNull
+ @Size(min = 3, max = 20)
 private  String nome;
 @Embedded
 private Endereco endereco;
@@ -56,7 +58,7 @@ private  Boolean ativo;
   if (this == o) return true;
   if (!(o instanceof Pessoa)) return false;
   Pessoa pessoa = (Pessoa) o;
-  return getCodigo().equals(pessoa.getCodigo()) && getNome().equals(pessoa.getNome()) && getEndereco().equals(pessoa.getEndereco()) && getAtivo().equals(pessoa.getAtivo());
+  return Objects.equals(getCodigo(), pessoa.getCodigo()) && Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getEndereco(), pessoa.getEndereco()) && Objects.equals(getAtivo(), pessoa.getAtivo());
  }
 
  @Override
@@ -64,3 +66,4 @@ private  Boolean ativo;
   return Objects.hash(getCodigo(), getNome(), getEndereco(), getAtivo());
  }
 }
+
