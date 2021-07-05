@@ -1,9 +1,12 @@
 package com.example.algaworks.algamoney.api.resource;
 
 
+import com.example.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.example.algaworks.algamoney.api.model.Categoria;
 import com.example.algaworks.algamoney.api.repository.CategoriaRepository;
+import com.sun.glass.ui.Application;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
@@ -29,16 +32,15 @@ import java.util.Optional;
         public List<Categoria> listar(){
         return categoriaRepository.findAll();
         }
-
+        @Autowired
+        private ApplicationEventPublisher publisher;
         @PostMapping
         public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
            Categoria categoriaSalva = categoriaRepository.save(categoria);
 
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                    .buildAndExpand(categoriaSalva.getCodigo()).toUri();
-            response.setHeader("Location", uri.toASCIIString());
+        publisher.publishEvent(new RecursoCriadoEvent(this,response, categoriaSalva.getCodigo()));
 
-            return ResponseEntity.created(uri).body(categoriaSalva);
+            return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
         }
 
          /*@GetMapping("/{codigo}")
