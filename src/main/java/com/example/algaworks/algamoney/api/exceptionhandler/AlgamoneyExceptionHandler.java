@@ -38,17 +38,24 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid
-            (MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+       HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         List<Erro> erros = criarListaDeErros(ex.getBindingResult());
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
     }
+
+
+////    @ExceptionHandler({EmptyResultDataAccessException.class})
+////    @ResponseStatus(HttpStatus.NOT_FOUND)
+////    public void EmptyResultDataAccessException(){
+//
+//    }
+
     @ExceptionHandler({EmptyResultDataAccessException.class})
     public ResponseEntity<Object> handleEmptyResultDataAcessException(EmptyResultDataAccessException ex, WebRequest request) {
         String mensagemUsuario = messageSource.getMessage("Recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
         String mensagemDesenvolvedor = ex.toString();
-
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 
@@ -70,7 +77,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 
         public Erro(String mensagemUsuario, String mensagemDesenvolvedor) {
             this.mensagemUsuario = mensagemUsuario;
-            MensagemDesenvolvedor = mensagemDesenvolvedor;
+            this.mensagemDesenvolvedor = mensagemDesenvolvedor;
         }
 
         public String getMensagemUsuario() {
@@ -78,7 +85,8 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         public String getMensagemDesenvolvedor() {
-            return MensagemDesenvolvedor;
+            String mensagemDesenvolvedor;
+            return mensagemDesenvolvedor;
         }
     }
 }
