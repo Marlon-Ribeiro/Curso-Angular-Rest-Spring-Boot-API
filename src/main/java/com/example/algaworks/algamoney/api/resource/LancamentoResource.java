@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lancamento")
+@RequestMapping("/lancamentos")
 public class LancamentoResource {
     @Autowired
     private LancamentoRepository lancamentoRepository;
@@ -22,10 +22,11 @@ public class LancamentoResource {
         return lancamentoRepository.findAll();
     }
 
-    @GetMapping("{/codigo}")
+    @GetMapping("/{codigo}")
     public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
-        return this.lancamentoRepository.findById(codigo).map(lancamento -> ResponseEntity.ok(lancamento)).
-                orElse(ResponseEntity.notFound().build());
+        return this.lancamentoRepository.findById(codigo)
+                .map(lancamento -> ResponseEntity.ok(lancamento))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

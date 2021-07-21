@@ -1,5 +1,7 @@
 package com.example.algaworks.algamoney.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,11 +15,13 @@ public class Lancamento {
     private Long codigo;
     private String descricao;
 
-    @Column (name = "data_vencimento")
+    @Column(name = "data_vencimento")
+    @JsonFormat(pattern =  "dd/MM/yyyy")
     private LocalDate dataVencimento;
 
-    @Column (name ="data_pagamento")
-    private  LocalDate dataPagamento;
+    @Column(name = "data_pagamento")
+    @JsonFormat(pattern =  "dd/MM/yyyy")
+    private LocalDate dataPagamento;
 
     private BigDecimal valor;
     private  String observacao;
