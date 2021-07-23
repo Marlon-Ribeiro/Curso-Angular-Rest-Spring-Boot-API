@@ -27,6 +27,12 @@ public class LancamentoResource {
         return lancamentoRepository.findAll();
     }
 
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
+        return this.lancamentoRepository.findById(codigo)
+                .map(lancamento -> ResponseEntity.ok(lancamento))
+                .orElse(ResponseEntity.notFound().build());
+    }
     @PostMapping
     public ResponseEntity<Lancamento>criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response){
         Lancamento lancamentoSalvo= lancamentoRepository.save(lancamento);
@@ -34,12 +40,4 @@ public class LancamentoResource {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
     }
-
-    @GetMapping("/{codigo}")
-    public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
-        return this.lancamentoRepository.findById(codigo)
-                .map(lancamento -> ResponseEntity.ok(lancamento))
-                .orElse(ResponseEntity.notFound().build());
-    }
-
 }
