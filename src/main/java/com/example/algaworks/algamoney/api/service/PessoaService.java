@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Service
-public class PessoaService {
+    @Service
+    public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
@@ -29,7 +29,8 @@ public class PessoaService {
         pessoaSalva.setAtivo(ativo);
         pessoaRepository.save(pessoaSalva);
         }
-    private Pessoa buscarPessoaPeloCodigo(Long codigo) {
+
+    public Pessoa buscarPessoaPeloCodigo(Long codigo) {
         Pessoa pessoaSalva = this.pessoaRepository.findById(codigo)
                 .orElseThrow(() -> new EmptyResultDataAccessException(1));
         return pessoaSalva;

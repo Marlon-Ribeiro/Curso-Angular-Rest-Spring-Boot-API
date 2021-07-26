@@ -1,5 +1,7 @@
 package com.example.algaworks.algamoney.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -51,6 +53,12 @@ private  Boolean ativo;
 
  public void setAtivo(Boolean ativo) {
   this.ativo = ativo;
+ }
+
+ @JsonIgnore
+ @Transient
+ public  boolean isInativa(){
+  return  !this.ativo;
  }
 
  @Override
