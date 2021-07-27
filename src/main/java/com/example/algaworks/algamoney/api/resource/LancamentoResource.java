@@ -35,7 +35,7 @@ public class LancamentoResource {
     private MessageSource messageSource;
 
     @GetMapping
-    public List<Lancamento> listar() {
+    public List<Lancamento> pesquisar(lancamentoFilter) {
         return lancamentoRepository.findAll();
     }
 
