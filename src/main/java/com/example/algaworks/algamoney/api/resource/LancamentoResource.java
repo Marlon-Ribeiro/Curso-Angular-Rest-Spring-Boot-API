@@ -46,6 +46,12 @@ public class LancamentoResource {
                 .map(lancamento -> ResponseEntity.ok(lancamento))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long codigo){this.lancamentoRepository.deleteById(codigo);
+    }
+
     @PostMapping
     public ResponseEntity<Lancamento>criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response){
         Lancamento lancamentoSalvo= lancamentoService.salvar(lancamento);
