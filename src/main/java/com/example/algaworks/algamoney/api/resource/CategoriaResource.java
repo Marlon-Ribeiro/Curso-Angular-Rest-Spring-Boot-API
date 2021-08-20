@@ -20,6 +20,7 @@ import java.util.List;
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @CrossOrigin (maxAge = 10, origins = { "http://localhost:63342"} )
     @GetMapping
     public List<Categoria> listar() {
         return categoriaRepository.findAll();
