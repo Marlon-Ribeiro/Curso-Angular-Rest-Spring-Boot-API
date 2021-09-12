@@ -5,6 +5,7 @@ import com.example.algaworks.algamoney.api.exceptionhandler.AlgamoneyExceptionHa
 import com.example.algaworks.algamoney.api.model.Lancamento;
 import com.example.algaworks.algamoney.api.repository.LancamentoRepository;
 import com.example.algaworks.algamoney.api.repository.filter.LancamentoFilter;
+import com.example.algaworks.algamoney.api.repository.projection.ResumoLancamento;
 import com.example.algaworks.algamoney.api.service.LancamentoService;
 import com.example.algaworks.algamoney.api.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class LancamentoResource {
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
     public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
         return lancamentoRepository.filtrar(lancamentoFilter, pageable);
+    }
+
+    @GetMapping(params = "Resumo")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
+    public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.resumir(lancamentoFilter, pageable);
     }
 
     @GetMapping("/{codigo}")

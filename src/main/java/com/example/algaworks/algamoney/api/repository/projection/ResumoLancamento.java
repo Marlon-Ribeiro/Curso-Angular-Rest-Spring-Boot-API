@@ -15,7 +15,7 @@ public class ResumoLancamento {
     private TipoLancamento tipo;
     private String categoria;
     private String pessoa;
-
+     // construtor
     public ResumoLancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
             BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
         this.codigo = codigo;
@@ -27,7 +27,7 @@ public class ResumoLancamento {
         this.categoria = categoria;
         this.pessoa = pessoa;
     }
-
+    // getter and setters
     public Long getCodigo() {
         return codigo;
     }
