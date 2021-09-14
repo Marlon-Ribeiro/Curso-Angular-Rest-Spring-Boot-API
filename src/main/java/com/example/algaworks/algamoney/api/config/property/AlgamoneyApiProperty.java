@@ -25,7 +25,7 @@ public class AlgamoneyApiProperty {
         this.originPermitida = originPermitida;
     }
 
-    public static class Seguranca{
+    public static class Seguranca {
 
         private boolean enableHttps;
 
@@ -36,8 +36,7 @@ public class AlgamoneyApiProperty {
         public void setEnableHttps(boolean enableHttps) {
             this.enableHttps = enableHttps;
         }
+
     }
 
-
 }
-

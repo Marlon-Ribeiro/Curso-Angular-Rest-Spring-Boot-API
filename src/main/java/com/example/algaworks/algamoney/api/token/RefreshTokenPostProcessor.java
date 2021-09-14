@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("deprecation")
 @ControllerAdvice
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
+
     @Autowired
     private AlgamoneyApiProperty algamoneyApiProperty;
 
@@ -31,8 +32,8 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 
     @Override
     public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken body, MethodParameter returnType,
-                                             MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                             ServerHttpRequest request, ServerHttpResponse response) {
+              MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
+              ServerHttpRequest request, ServerHttpResponse response) {
 
         HttpServletRequest req = ((ServletServerHttpRequest) request).getServletRequest();
         HttpServletResponse resp = ((ServletServerHttpResponse) response).getServletResponse();
